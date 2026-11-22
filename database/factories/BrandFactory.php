@@ -16,9 +16,10 @@ class BrandFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
-        return [
-            //
-        ];
-    }
+{
+    return [
+        'name' => fake()->unique()->company(),
+        'description' => fake()->sentence(),
+    ];
+}
 }
