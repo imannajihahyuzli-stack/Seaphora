@@ -10,8 +10,11 @@ Route::middleware(['auth'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 
     Route::get('products', ProductsIndex::class)->name('products.index');
-    Route::get('products/create', ProductFormPage::class)->name('products.create');
-    Route::get('products/{product}/edit', ProductFormPage::class)->name('products.edit');
+
+    Route::middleware('role:staff,admin')->group(function () {
+        Route::get('products/create', ProductFormPage::class)->name('products.create');
+        Route::get('products/{product}/edit', ProductFormPage::class)->name('products.edit');
+    });
 });
 
 require __DIR__.'/settings.php';
