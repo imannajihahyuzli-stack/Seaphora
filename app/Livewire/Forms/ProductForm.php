@@ -8,21 +8,21 @@ use Livewire\Form;
 
 class ProductForm extends Form
 {
-    public $brand_id = '';
+    public int|string $brand_id = '';
 
-    public $category_id = '';
+    public int|string $category_id = '';
 
-    public $name = '';
+    public string $name = '';
 
-    public $description = '';
+    public ?string $description = '';
 
-    public $price = '';
+    public string|float $price = '';
 
-    public $stock = 0;
+    public int|string $stock = 0;
 
-    public $is_active = true;
+    public bool $is_active = true;
 
-    // Reuse the rules from the Form Request so they are defined in one place
+    /** @return array<string, array<int, string>> */
     public function rules(): array
     {
         return (new StoreProductRequest)->rules();
