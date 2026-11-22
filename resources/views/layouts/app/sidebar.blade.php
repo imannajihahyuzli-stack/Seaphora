@@ -15,6 +15,15 @@
                     <flux:sidebar.item icon="shopping-bag" :href="route('products.index')" :current="request()->routeIs('products.*')" wire:navigate>
                         Products
                     </flux:sidebar.item>
+                    @if (auth()->user()->isAdmin())
+                    <flux:sidebar.item icon="tag" :href="route('brands.index')" :current="request()->routeIs('brands.*')" wire:navigate>
+                        Brands
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="squares-2x2" :href="route('categories.index')" :current="request()->routeIs('categories.*')" wire:navigate>
+                        Categories
+                    </flux:sidebar.item>
+                    @endif
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
