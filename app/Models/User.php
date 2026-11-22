@@ -26,8 +26,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string $role
  */
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements PasskeyUser
 {
@@ -46,6 +47,36 @@ class User extends Authenticatable implements PasskeyUser
             'password' => 'hashed',
         ];
     }
+
+    public function cart()
+{
+    return $this->hasOne(Cart::class);
+}
+
+public function orders()
+{
+    return $this->hasMany(Order::class);
+}
+
+public function reviews()
+{
+    return $this->hasMany(Review::class);
+}
+
+public function wishlists()
+{
+    return $this->hasMany(Wishlist::class);
+}
+
+public function isAdmin(): bool
+{
+    return $this->role === 'admin';
+}
+
+public function isStaff(): bool
+{
+    return in_array($this->role, ['staff', 'admin']);
+}
 
     /**
      * Get the user's initials
