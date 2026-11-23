@@ -8,7 +8,11 @@
     </div>
 
     @if (session('status'))
-        <flux:callout variant="success" icon="check-circle" :heading="session('status')" />
+        <x-auto-alert :message="session('status')" />
+    @endif
+
+    @if (session('error'))
+        <x-auto-alert type="danger" :message="session('error')" />
     @endif
 
     <div class="grid gap-4 md:grid-cols-3">
@@ -56,15 +60,24 @@
                             </flux:badge>
                         </td>
                         <td class="p-3 text-right">
+                            <flux:button size="sm" href="{{ route('reviews.index', $product) }}" wire:navigate>Reviews</flux:button>
+                            @can('create', App\Models\Cart::class)
+                                <flux:button size="sm" variant="primary"
+                                    wire:click="addToCart({{ $product->id }})"
+                                    :disabled="$product->stock < 1">
+                                    Add to cart
+                                </flux:button>
+                            @endcan
                             @can('update', $product)
                                 <flux:button size="sm" href="{{ route('products.edit', $product) }}" wire:navigate>Edit</flux:button>
                             @endcan
                             @can('delete', $product)
-                                <flux:button size="sm" variant="danger"
-                                    wire:click="delete({{ $product->id }})"
-                                    wire:confirm="Delete this product?">
-                                    Delete
-                                </flux:button>
+                                <x-confirm-modal
+                                    label="Delete"
+                                    title="Delete product?"
+                                    :message="'Delete '.$product->name.'? This cannot be undone.'"
+                                    :action="'delete('.$product->id.')'"
+                                    confirm-label="Yes, delete" />
                             @endcan
                         </td>
                     </tr>

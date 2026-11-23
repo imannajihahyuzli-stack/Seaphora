@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Products;
 
+use App\Actions\AddToCartAction;
 use App\Actions\DeleteProductAction;
 use App\Models\Brand;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
+use DomainException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Attributes\Url;
@@ -38,6 +41,20 @@ class Index extends Component
     public function updatedCategory(): void
     {
         $this->resetPage();
+    }
+
+    public function addToCart(int $id, AddToCartAction $action): void
+    {
+        $this->authorize('create', Cart::class);
+
+        $product = Product::findOrFail($id);
+
+        try {
+            $action->handle(auth()->user(), $product);
+            session()->flash('status', "{$product->name} added to cart.");
+        } catch (DomainException $e) {
+            session()->flash('error', $e->getMessage());
+        }
     }
 
     public function delete(int $id, DeleteProductAction $action): void

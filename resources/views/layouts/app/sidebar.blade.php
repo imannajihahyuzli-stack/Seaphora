@@ -15,6 +15,14 @@
                     <flux:sidebar.item icon="shopping-bag" :href="route('products.index')" :current="request()->routeIs('products.*')" wire:navigate>
                         Products
                     </flux:sidebar.item>
+                    @if (auth()->user()->role === 'customer')
+                    <flux:sidebar.item icon="shopping-cart" :href="route('cart.index')" :current="request()->routeIs('cart.*')" wire:navigate>
+                        Cart
+                    </flux:sidebar.item>
+                    @endif
+                    <flux:sidebar.item icon="clipboard-document-list" :href="route('orders.index')" :current="request()->routeIs('orders.*')" wire:navigate>
+                        {{ auth()->user()->isStaff() ? 'Orders' : 'My Orders' }}
+                    </flux:sidebar.item>
                     @if (auth()->user()->isAdmin())
                     <flux:sidebar.item icon="tag" :href="route('brands.index')" :current="request()->routeIs('brands.*')" wire:navigate>
                         Brands
