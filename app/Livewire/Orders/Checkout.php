@@ -47,7 +47,7 @@ class Checkout extends Component
             ->where('user_id', auth()->id())
             ->first();
 
-        $items = $cart?->items ?? collect();
+        $items = $cart->items ?? collect();
 
         $total = $items->sum(fn ($item) => $item->quantity * $item->product->price);
 

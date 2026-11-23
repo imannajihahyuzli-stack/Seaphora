@@ -19,7 +19,7 @@ class AddToCartAction
         $cart = Cart::firstOrCreate(['user_id' => $user->id]);
 
         $item = $cart->items()->firstOrNew(['product_id' => $product->id]);
-        $item->quantity = min(($item->quantity ?? 0) + $quantity, $product->stock);
+        $item->quantity = max(0, min(($item->quantity ?? 0) + $quantity, $product->stock));
         $item->save();
 
         return $item;
