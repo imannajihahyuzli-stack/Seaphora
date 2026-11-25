@@ -97,9 +97,9 @@ The suite is in the `tests/` folder (63 feature tests and 34 unit tests).
 
 | Student | Role | Owned code |
 | --- | --- | --- |
-| Student 1: [Syarifah Nur Syakirah] | Security Lead | Fortify setup (`FortifyServiceProvider`, `config/fortify.php`, `app/Actions/Fortify`), role middleware (`EnsureUserHasRole`), route guards in `routes/web.php`, auth and settings pages, `.env` handling, auth and role tests |
-| Student 2: [Iman Najihah] | Catalogue Lead | Products, Brands and Categories: Livewire components, `ProductForm`, `BrandForm`, `CategoryForm`, `StoreProductRequest`, their Create/Update/Delete Actions, Product, Brand and Category Policies, related tests |
-| Student 3: [Ain Sofea] | Shop Flow Lead | Cart, Checkout, Orders and Reviews: Livewire components, Cart, Order and Review Policies, `CreateOrderAction`, `UpdateOrderStatusAction`, cart and review Actions, Alpine `confirm-modal` and `auto-alert`, related tests |
+| Student 1: Syarifah Nur Syakirah | Security Lead | Fortify setup (`FortifyServiceProvider`, `config/fortify.php`, `app/Actions/Fortify`), role middleware (`EnsureUserHasRole`), route guards in `routes/web.php`, auth and settings pages, `.env` handling, auth and role tests |
+| Student 2: Iman Najihah | Catalogue Lead | Products, Brands and Categories: Livewire components, `ProductForm`, `BrandForm`, `CategoryForm`, `StoreProductRequest`, their Create/Update/Delete Actions, Product, Brand and Category Policies, related tests |
+| Student 3: Ain Sofea | Shop Flow Lead | Cart, Checkout, Orders and Reviews: Livewire components, Cart, Order and Review Policies, `CreateOrderAction`, `UpdateOrderStatusAction`, cart and review Actions, Alpine `confirm-modal` and `auto-alert`, related tests |
 
 ## Project structure
 
